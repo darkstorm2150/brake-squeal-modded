@@ -8,8 +8,8 @@ local squeals = {
 }
 
 local function initialize_schedule()
-    global.__brake_squeal_mod = global.__brake_squeal_mod or {};
-    global.__brake_squeal_mod.squeal_schedule = {}
+    storage.__brake_squeal_mod = storage.__brake_squeal_mod or {};
+    storage.__brake_squeal_mod.squeal_schedule = {}
 end
 
 local function get_carriages_for_sounds(train)
@@ -24,9 +24,9 @@ end
 -- Schedules the next sound to be played
 local function task_scheduler(train)
     local future_tick = game.tick - (game.tick % 5) + 10
-    local schedule = global.squeal_schedule[future_tick] or {} -- if the tick table doesn't exist, make one
+    local schedule = storage.squeal_schedule[future_tick] or {} -- if the tick table doesn't exist, make one
     schedule[#schedule+1] = train                              -- append value to table
-    global.squeal_schedule[future_tick] = schedule             -- reassign table to global
+    storage.squeal_schedule[future_tick] = schedule             -- reassign table to storage
 end
 
 
@@ -70,8 +70,8 @@ script.on_event(defines.events.on_train_changed_state,
 
 -- on_tick
 local function task_handler(event)
-    -- Retrieve the tick table, using the namespaced global variable
-    local tick = global.__brake_squeal_mod.squeal_schedule[event.tick]
+    -- Retrieve the tick table, using the namespaced storage variable
+    local tick = storage.__brake_squeal_mod.squeal_schedule[event.tick]
     
     -- Check if the tick table exists and is a table
     if tick and type(tick) == 'table' then
@@ -105,7 +105,7 @@ local function task_handler(event)
         end
         
         -- Clean up: Remove the tick table after processing
-        global.__brake_squeal_mod.squeal_schedule[event.tick] = nil
+        storage.__brake_squeal_mod.squeal_schedule[event.tick] = nil
     else
         -- Optional: Log or handle the case when tick is not found or not a table
         -- game.print("Tick table not found or invalid for tick: ".. tostring(event.tick))
