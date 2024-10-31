@@ -12,4 +12,4 @@ Makes trains audibly squeal/screech as they brake, to soothe your ears and engin
     + Known Issue: Cargo Ships from Cargo Ships produce brake squeals (should not happen)
     + Planned Features (by original author): Additional effects while braking (e.g., visible sparks), Settings/Customization
 
-**Your Feedback is Welcome!** If you have thoughts on this temporary update or the original mod, please share them with us!
+**Your Feedback/Involvement is Welcome!** If you have thoughts on this temporary update or the original mod, please share them with us!
