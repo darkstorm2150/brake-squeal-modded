@@ -1,0 +1,55 @@
+---------------------------------------------------------------------------------------------------
+Version: 2.0.5
+Date: 31. 10. 2024
+  Tweaks:
+    - Dumped more code..
+---------------------------------------------------------------------------------------------------
+Version: 2.0.4
+Date: 31. 10. 2024
+  Tweaks:
+    - Added name change to folder again..
+---------------------------------------------------------------------------------------------------
+Version: 2.0.3
+Date: 31. 10. 2024
+  Tweaks:
+    - Added category = "environment
+---------------------------------------------------------------------------------------------------
+Version: 2.0.2
+Date: 31. 10. 2024
+  Tweaks:
+    - Updated pattern and renamed main directory.
+---------------------------------------------------------------------------------------------------
+Version: 2.0.1
+Date: 31. 10. 2024
+  Tweaks:
+    - Added a small class to sounds.
+---------------------------------------------------------------------------------------------------
+Version: 2.0.0
+Date: 31. 10. 2024
+  Tweaks:
+    - Updated to 2.0 Factorio
+---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 28. 08. 2023
+  Tweaks:
+    - Added mod thumbnail
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 28. 08. 2023
+  Features:
+    - Manual trains now produce squeals when braking.
+  Bugfixes:
+    - Double-headed trains braking while reversing now squeal.
+    - Fixed a crash when a manual or moving train is modified.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 27. 08. 2023
+  Bugfixes:
+    - Trains with less than 3 carriages now squeal.
+    - Trains approaching temporary stops now squeal.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 27. 08. 2023
+  Major Features:
+    - Initial release.
+    - Automatic trains now squeal when braking.
