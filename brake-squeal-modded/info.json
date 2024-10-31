@@ -1,0 +1,10 @@
+{
+    "name": "brake-squeal-modded",
+    "version": "2.0.5",
+    "title": "Brake Squeal 2.0",
+    "author": "Darkstorm2150",
+    "contact": "Darkstorm2150 (Discord, Telegram)",
+    "factorio_version": "2.0",
+    "dependencies": ["base"],
+    "description": "Makes trains audibly squeal/screech as they brake, to soothe your ears and engineering brain.\n\nThis mod is incomplete.\n\nThis is my first mod! If you like it or have feedback, please let me know!"
+  }
