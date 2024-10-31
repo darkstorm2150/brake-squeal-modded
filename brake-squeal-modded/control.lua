@@ -24,9 +24,9 @@ end
 -- Schedules the next sound to be played
 local function task_scheduler(train)
     local future_tick = game.tick - (game.tick % 5) + 10
-    local schedule = storage.squeal_schedule[future_tick] or {} -- if the tick table doesn't exist, make one
+    local schedule = storage.__brake_squeal_mod.squeal_schedule[future_tick] or {} -- if the tick table doesn't exist, make one
     schedule[#schedule+1] = train                              -- append value to table
-    storage.squeal_schedule[future_tick] = schedule             -- reassign table to storage
+    storage.__brake_squeal_mod.squeal_schedule[future_tick] = schedule             -- reassign table to storage
 end
 
 
