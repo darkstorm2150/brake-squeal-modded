@@ -29,14 +29,17 @@ local function task_scheduler(train)
     storage.__brake_squeal_mod.squeal_schedule[future_tick] = schedule             -- reassign table to storage
 end
 
+local function math_clamp(x, x_min, x_max)
+	return math.max(math.min(x, x_max), x_min)
+end
 
 local function sound_handler(train)
     for i,entity in ipairs(get_carriages_for_sounds(train)) do
         local sound = squeals[math.random(#squeals)]
         local speed = math.abs(train.speed)
-        if game.is_valid_sound_path(sound) and entity and speed > 0.05 then
-            local volume = 1 - math.min(1, speed)
-            if speed < 0.15 then volume = 0.3 end
+		if not helpers.is_valid_sound_path(sound) then game.print("path is invalid:"..tostring(sound)) end
+        if helpers.is_valid_sound_path(sound) and entity and speed > 0.05 then -- no sound below 10.8km/h
+            local volume = math_clamp(speed*2, 0.3, 1) -- start decreasing volume at around 108km/h if my math is right
             entity.surface.play_sound{path = sound, position = entity.position, volume_modifier = volume}
         end
     end
@@ -78,30 +81,28 @@ local function task_handler(event)
         -- Iterate over all values in the tick table
         for _, value in pairs(tick) do
             -- Check if the train is still valid
-            if not value.valid then
-                -- If not valid, skip to the next iteration
-                goto continue
-            end
-            
-            -- Check the train's acceleration state
-            if value.riding_state.acceleration ~= defines.riding.acceleration.braking then
-                -- If not braking, check for manual mode
-                if value.manual_mode then
-                    -- If in manual mode, reschedule the sound
-                    task_scheduler(value)
-                    -- Skip to the next iteration (continue)
-                    goto continue
-                else
-                    -- If not braking and not in manual mode, skip playing the sound
-                    goto continue
-                end
-            end
-            
-            -- Play the sound for the train
-            sound_handler(value)
-            
-            -- Label for skipping to the next iteration (continue)
-            ::continue::
+			-- If not valid, skip to the next iteration
+            if value.valid then   
+				-- Check the train's acceleration state
+				if value.riding_state.acceleration ~= defines.riding.acceleration.braking then
+					-- If not braking, check for manual mode
+					if value.manual_mode then
+						-- If in manual mode, reschedule the sound
+						task_scheduler(value)
+						-- Skip to the next iteration (continue)
+						--goto continue
+					end
+					-- If not braking and not in manual mode, skip playing the sound
+				else
+					-- Play the sound for the train
+					task_scheduler(value)
+					sound_handler(value)
+					--goto continue
+				end
+			end
+				
+			-- Label for skipping to the next iteration (continue)
+			--::continue::
         end
         
         -- Clean up: Remove the tick table after processing
